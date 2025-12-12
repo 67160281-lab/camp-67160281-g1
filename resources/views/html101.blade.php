@@ -13,7 +13,7 @@
                     ถูกต้อง
                  </div>
                  <div class="invalid-feedback">
-                    โปรดระบุขื่อ
+                    โปรดระบุขื่อนะ
                  </div>
              </div>
          </div>
