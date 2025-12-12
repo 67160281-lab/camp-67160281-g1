@@ -102,10 +102,10 @@
                             <option value="red">สีแดง</option>
                             <option value="blue">สีน้ำเงิน</option>
                             <option value="green">สีเขียว</option>
+                            <option value="purple">สีม่วง</option>
                         </select>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-sm-3">
                         <label>แนวเพลงที่ชอบ</label>
