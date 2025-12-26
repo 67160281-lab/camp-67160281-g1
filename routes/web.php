@@ -11,3 +11,5 @@ Route::get('/', [App\Http\Controllers\MyController::class, 'index']);
 Route::post('/', [App\Http\Controllers\MyController::class, 'store']);
 Route::get('/calculate', [App\Http\Controllers\MyController::class, 'info']);
 Route::post('/calculate', [App\Http\Controllers\MyController::class, 'calculate']);
+
+Route::resource('/flights', App\Http\Controllers\FlightController::class);
