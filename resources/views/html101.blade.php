@@ -1,14 +1,15 @@
 @extends('template.default')
 @section('title', 'Workshop Form')
+@section('header', 'Workshop #HTML - Form')
 @section('content')
-    <h1>Workshop #HTML Form</h1>
-    <form>
+    <form action="/" method="post">
+        @csrf
         <div class="row mb-3">
             <div class="col-sm-3">
                 <label for="fname">ชื่อ</label>
             </div>
             <div class="col-sm-9">
-                <input type="text" id="fname" class="form-control">
+                <input type="text" id="fname" name="fname" class="form-control">
                 <div class="valid-feedback">ถูกต้อง</div>
                 <div class="invalid-feedback">โปรดระบุชื่อ</div>
             </div>
@@ -19,7 +20,7 @@
                 <label for="lname">สกุล</label>
             </div>
             <div class="col-sm-9">
-                <input type="text" id="lname" class="form-control">
+                <input type="text" id="lname" name="lname" class="form-control">
                 <div class="valid-feedback">ถูกต้อง</div>
                 <div class="invalid-feedback">โปรดระบุสกุล</div>
             </div>
@@ -30,7 +31,7 @@
                 <label for="dob">วัน/เดือน/ปีเกิด</label>
             </div>
             <div class="col-sm-9">
-                <input type="date" id="dob" class="form-control">
+                <input type="date" id="dob" name="dob" class="form-control">
                 <div class="valid-feedback">ถูกต้อง</div>
                 <div class="invalid-feedback">โปรดระบุวันเกิด</div>
             </div>
@@ -41,7 +42,7 @@
                 <label for="age">อายุ</label>
             </div>
             <div class="col-sm-9">
-                <input type="number" id="age" class="form-control">
+                <input type="number" id="age" name='age' class="form-control">
                 <div class="valid-feedback">ถูกต้อง</div>
                 <div class="invalid-feedback">โปรดระบุอายุ</div>
             </div>
@@ -53,11 +54,11 @@
             </div>
             <div class="col-sm-9">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="ชาย">
                     <label class="form-check-label" for="male">ชาย</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="หญิง">
                     <label class="form-check-label" for="female">หญิง</label>
                 </div>
                 <div id="gender-feedback" class="text-danger d-none" style="font-size: 0.875em;">
@@ -71,7 +72,7 @@
                 <label for="file">รูป</label>
             </div>
             <div class="col-sm-9">
-                <input type="file" id="file" class="form-control">
+                <input type="file" id="file" name="file" class="form-control">
                 <div class="valid-feedback">ถูกต้อง</div>
                 <div class="invalid-feedback">โปรดเลือกไฟล์รูปภาพ</div>
             </div>
@@ -82,7 +83,7 @@
                 <label for="address">ที่อยู่</label>
             </div>
             <div class="col-sm-9">
-                <textarea id="address" class="form-control" rows="4"></textarea>
+                <textarea id="address" name="address" class="form-control" rows="4"></textarea>
                 <div class="valid-feedback">ถูกต้อง</div>
                 <div class="invalid-feedback">โปรดระบุที่อยู่</div>
             </div>
@@ -93,12 +94,12 @@
                 <label for="color">สีที่ชอบ</label>
             </div>
             <div class="col-sm-9">
-                <select id="color" class="form-select">
+                <select id="color" name="color" class="form-select">
                     <option value="" selected disabled>-- กรุณาเลือกสี --</option>
-                    <option value="red">สีแดง</option>
-                    <option value="blue">สีน้ำเงิน</option>
-                    <option value="green">สีเขียว</option>
-                    <option value="purple">สีม่วง</option>
+                    <option value="สีแดง">สีแดง</option>
+                    <option value="สีน้ำเงิน">สีน้ำเงิน</option>
+                    <option value="สีเขียว">สีเขียว</option>
+                    <option value="สีม่วง">สีม่วง</option>
                 </select>
                 <div class="valid-feedback">ถูกต้อง</div>
                 <div class="invalid-feedback">โปรดเลือกสีที่ชอบ</div>
@@ -111,15 +112,15 @@
             </div>
             <div class="col-sm-9">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="music" id="music1" value="for_life">
+                    <input class="form-check-input" type="radio" name="music" id="music1" value="เพื่อชีวิต">
                     <label class="form-check-label" for="music1">เพื่อชีวิต</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="music" id="music2" value="country">
+                    <input class="form-check-input" type="radio" name="music" id="music2" value="ลูกทุ่ง">
                     <label class="form-check-label" for="music2">ลูกทุ่ง</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="music" id="music3" value="other">
+                    <input class="form-check-input" type="radio" name="music" id="music3" value="อื่นๆ">
                     <label class="form-check-label" for="music3">อื่นๆ</label>
                 </div>
                  <div id="music-feedback" class="text-danger d-none" style="font-size: 0.875em;">
@@ -154,89 +155,84 @@
 @endsection
 
 @push('scripts')
-    <script>
-        let ClickMe = function () {
-            
-            // 1. สร้างฟังก์ชันย่อยสำหรับเช็คช่องทั่วไป (Text, Number, Date, Select, Textarea)
-            const validateField = (id) => {
-                let el = document.getElementById(id);
-                if (el.value.trim() == "") {
-                    el.classList.remove("is-valid");
-                    el.classList.add("is-invalid");
-                    return false; // ไม่ผ่าน
-                } else {
-                    el.classList.remove("is-invalid");
-                    el.classList.add("is-valid");
-                    return true; // ผ่าน
-                }
-            }
+   <script>
+    let ClickMe = function () {
+        // ตัวแปรเช็คว่าผ่านทั้งหมดไหม (ตั้งค่าเริ่มต้นเป็น true)
+        let isValid = true; 
 
-            // เรียกใช้ฟังก์ชันกับ ID ต่างๆ
-            validateField('fname');
-            validateField('lname');
-            validateField('dob');
-            validateField('age');
-            validateField('file');
-            validateField('address');
-            validateField('color');
-
-            // 2. การเช็ค Checkbox (ยินยอม)
-            let consent = document.getElementById('consent');
-            if (!consent.checked) {
-                consent.classList.add("is-invalid");
+        // 1. เช็คช่องทั่วไป (เก็บผลลัพธ์ลงตัวแปร isValid)
+        const validateField = (id) => {
+            let el = document.getElementById(id);
+            if (el.value.trim() == "") {
+                el.classList.remove("is-valid");
+                el.classList.add("is-invalid");
+                return false; 
             } else {
-                consent.classList.remove("is-invalid");
-                consent.classList.add("is-valid");
-            }
-
-            // 3. การเช็ค Radio Button (เพศ)
-            let genderRadios = document.getElementsByName('gender');
-            let genderSelected = false;
-            // วนลูปดูว่ามีอันไหนถูกเลือกไหม
-            for (let radio of genderRadios) {
-                if (radio.checked) {
-                    genderSelected = true;
-                    break;
-                }
-            }
-            // จัดการแสดงผล Error ของ Radio (ต้องทำ Custom นิดหน่อยเพราะ Bootstrap ไม่ Auto ให้ Radio Group)
-            let genderFeedback = document.getElementById('gender-feedback');
-            if(!genderSelected){
-                genderFeedback.classList.remove('d-none'); // แสดงข้อความ error
-            } else {
-                genderFeedback.classList.add('d-none'); // ซ่อนข้อความ error
-            }
-
-             // 4. การเช็ค Radio Button (เพลง)
-            let musicRadios = document.getElementsByName('music');
-            let musicSelected = false;
-            for (let radio of musicRadios) {
-                if (radio.checked) {
-                    musicSelected = true;
-                    break;
-                }
-            }
-            let musicFeedback = document.getElementById('music-feedback');
-            if(!musicSelected){
-                musicFeedback.classList.remove('d-none');
-            } else {
-                musicFeedback.classList.add('d-none');
+                el.classList.remove("is-invalid");
+                el.classList.add("is-valid");
+                return true; 
             }
         }
-        
-        // ส่วนอื่นๆ ที่ไม่ได้ใช้ในการตรวจสอบ form คงไว้เหมือนเดิม หรือลบออกก็ได้ถ้าไม่ได้ใช้
-        let myfunc = (callback) => {
-            callback("in Callback")
-        }
-        callMe = (param) => {
-            console.log(param);
-        }
-        myfunc(callMe)
 
-        let myvar1 = 1
-        let myvar2 = "1"
-        myvar2 = parseInt(myvar2)
-        console.log(myvar1 + myvar2 + "\n\n\n\ntest")
-        console.log(1 === '1');
-    </script>
+        // ต้องเอาผลลัพธ์มา AND กัน เพื่อดูว่ามีอันไหนเป็นเท็จไหม
+        // หมายเหตุ: การเขียนแบบนี้จะทำให้ validate ทำงานทุกช่อง แม้ช่องก่อนหน้าจะผิด (ซึ่งดีแล้วจะได้แดงให้ครบ)
+        isValid = validateField('fname') && isValid;
+        isValid = validateField('lname') && isValid;
+        isValid = validateField('dob') && isValid;
+        isValid = validateField('age') && isValid;
+        isValid = validateField('file') && isValid;
+        isValid = validateField('address') && isValid;
+        isValid = validateField('color') && isValid;
+
+        // 2. เช็ค Checkbox
+        let consent = document.getElementById('consent');
+        if (!consent.checked) {
+            consent.classList.add("is-invalid");
+            isValid = false; // ปรับเป็นไม่ผ่าน
+        } else {
+            consent.classList.remove("is-invalid");
+            consent.classList.add("is-valid");
+        }
+
+        // 3. เช็ค Radio Gender
+        let genderRadios = document.getElementsByName('gender');
+        let genderSelected = false;
+        for (let radio of genderRadios) {
+            if (radio.checked) {
+                genderSelected = true;
+                break;
+            }
+        }
+        let genderFeedback = document.getElementById('gender-feedback');
+        if(!genderSelected){
+            genderFeedback.classList.remove('d-none');
+            isValid = false; // ปรับเป็นไม่ผ่าน
+        } else {
+            genderFeedback.classList.add('d-none');
+        }
+
+        // 4. เช็ค Radio Music
+        let musicRadios = document.getElementsByName('music');
+        let musicSelected = false;
+        for (let radio of musicRadios) {
+            if (radio.checked) {
+                musicSelected = true;
+                break;
+            }
+        }
+        let musicFeedback = document.getElementById('music-feedback');
+        if(!musicSelected){
+            musicFeedback.classList.remove('d-none');
+            isValid = false; // ปรับเป็นไม่ผ่าน
+        } else {
+            musicFeedback.classList.add('d-none');
+        }
+
+        // --- จุดสำคัญที่สุด: ถ้าผ่านหมด ให้ส่งฟอร์ม ---
+        if (isValid) {
+            // สั่ง Submit Form
+            document.querySelector('form').submit();
+        }
+    }
+</script>
 @endpush
