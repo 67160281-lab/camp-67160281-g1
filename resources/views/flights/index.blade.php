@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Flight Create</h1>
-    <form action="" method="post">
+    <form action="{{url('/flights')}}" method="post">
         @csrf
         <label for="name">Name:</label>
         <input class="form-control" type="text" name="name" id="name">
@@ -14,23 +14,5 @@
         <input class="form-control" type="text" name="price" id="price">
         <button class="btn btn-primary" type="submit">Create Flight</button>
     </form>
-    <h1>Flight Lists</h1>
-    <table>
-        <tr>
-            <td>id</td>
-            <td>name</td>
-            <td>airline</td>
-            <td>number_of_seats</td>
-            <td>price</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>1.</td>
-            <td>name</td>
-            <td>airline</td>
-            <td>number_of_seats</td>
-            <td>price</td>
-            <td>Edit / Delete</td>
-        </tr>
-    </table>
+    @include('flights.table')
 @endsection

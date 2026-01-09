@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('flights', function (Blueprint $table) {
+        Schema::create('pokedexs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('airline');
-            $table->integer('number_of_seats');
-            $table->decimal('price');
+            $table->string('type');
+            $table->string('species');
+            $table->double('height');
+            $table->double('weight');
+            $table->double('hp');
+            $table->double('attack');
+            $table->double('defense');
+            $table->string('image_url');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('flights');
+        Schema::dropIfExists('pokedexs');
     }
 };
