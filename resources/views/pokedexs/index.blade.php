@@ -2,7 +2,16 @@
 
 @section('content')
     <h1>Pokedex Create</h1>
-    <form action="{{url('/pokedexs')}}" method="post">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form action="{{ url('/pokedexs') }}" method="post">
         @csrf
         <label for="name">Name:</label>
         <input class="form-control" type="text" name="name" id="name">

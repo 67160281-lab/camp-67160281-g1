@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pokedex;
 class PokedexController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +21,7 @@ class PokedexController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -29,6 +29,7 @@ class PokedexController extends Controller
      */
     public function store(Request $request)
     {
+        $this->check($request);
         $pokedex = new Pokedex;
         $pokedex->name = $request->input('name');
         $pokedex->type = $request->input('type');
@@ -41,8 +42,8 @@ class PokedexController extends Controller
         $pokedex->image_url = $request->input('image_url');
 
         $pokedex->save();
-        
-        return redirect('/pokedexs');
+
+        return redirect('/pokedexs')->with('success', 'บันทึกข้อมูลเรียบร้อยแล้ว');
     }
 
     /**
@@ -50,7 +51,8 @@ class PokedexController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['pokedex'] = Pokedex::find($id);
+        return view('pokedexs.show_index', $data);
     }
 
     /**
@@ -66,10 +68,14 @@ class PokedexController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-{
-    $pokedex = Pokedex::findOrFail($id);
+   public function update(Request $request, string $id)
+    {
+    // 1. ตรวจสอบความถูกต้อง (image_url เป็น nullable คือไม่ใส่ก็ได้)
+    $this->check($request);
 
+
+    $pokedex = Pokedex::findOrFail($id);
+    // 2. อัปเดตข้อมูลทั่วไป
     $pokedex->name = $request->input('name');
     $pokedex->type = $request->input('type');
     $pokedex->species = $request->input('species');
@@ -79,15 +85,16 @@ class PokedexController extends Controller
     $pokedex->attack = $request->input('attack');
     $pokedex->defense = $request->input('defense');
 
-    // 👇 สำคัญ
-    if ($request->filled('image_url')) {
+    // 3. จัดการเรื่องรูปภาพ (ถ้าในฟอร์มมีการกรอกมาให้ใช้ค่าใหม่ ถ้าไม่มีให้คงค่าเดิมไว้)
+    if ($request->has('image_url')) {
         $pokedex->image_url = $request->input('image_url');
     }
 
-    $pokedex->save();   
+    $pokedex->save();
 
-    return redirect('/pokedexs');
-}
+    return redirect('/pokedexs')->with('success', 'อัปเดตข้อมูลเรียบร้อยแล้ว');
+    }
+
 
 
     /**
@@ -98,5 +105,20 @@ class PokedexController extends Controller
         $pokedex = Pokedex::find($id);
         $pokedex->delete();
         return redirect('/pokedexs');
+    }
+
+    public function check(Request $request)
+    {
+        $request->validate([
+        'name' => 'required',
+        'type' => 'required',
+        'species' => 'required',
+        'height' => 'required|numeric',
+        'weight' => 'required|numeric',
+        'hp' => 'required|integer',
+        'attack' => 'required|integer',
+        'defense' => 'required|integer',
+        'image_url' => 'required|url',
+    ]);
     }
 }
